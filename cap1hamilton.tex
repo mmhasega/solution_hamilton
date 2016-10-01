@@ -1,0 +1,312 @@
+\chapter{Processos ARMA estacionários}
+
+\begin{enumerate}
+	\item %1
+		\begin{align*}
+		E(Y_t)&=0 \therefore \mu=0\\
+		\\
+		\text{Var}(Y_t)=E(Y_t-\mu)^2=E(Y_t)^2&=\text{Var}(\varepsilon_t+2.4\varepsilon_{t-1}+0.8\varepsilon_{t-2})\\
+		&=(1+5.76+0.64)\sigma^2=7.4
+		\end{align*}
+		Como a média e a variância não dependem do tempo, o processo é estacionário em covariância.
+		
+		\begin{align*}
+		\text{Cov}(Y_t,Y_{t-1})=E(Y_t-\mu)(Y_{t-1}-\mu)&=E(\varepsilon_t+2.4\varepsilon_{t-1}+0.8\varepsilon_{t-2})(\varepsilon_{t-1}+2.4\varepsilon_{t-2}+0.8\varepsilon_{t-3})\\
+		&=(2.4+1.92)\sigma^2=4.32\\
+		\\
+		\text{Cov}(Y_t,Y_{t-2})=E(Y_t-\mu)(Y_{t-2}-\mu)&=E(\varepsilon_t+2.4\varepsilon_{t-1}+0.8\varepsilon_{t-2})(\varepsilon_{t-2}+2.4\varepsilon_{t-3}+0.8\varepsilon_{t-4})\\
+		&=0.8E(\varepsilon_{t-2}^2)=0.8\sigma^2=0.8
+		\end{align*}
+		
+		\item %2
+		\begin{align*}
+			Y_t&=1.1Y_{t-1}-0.18Y_{t-2}+\varepsilon_t\\
+			(1-1.1L+0.18L^2)Y_t&=\varepsilon_t\\
+			Y_t&=(1-1.1L+0.18L^2)^{-1}\varepsilon_t\\
+			\\
+			E(Y_t)&=(1-1.1L+0.18L^2)^{-1}E(\varepsilon_t)=0 \therefore \mu=0\\
+			\\
+			\text{Encontrando a variância }:\gamma_0\\
+			Y_t^2&=1.1Y_tY_{t-1}-0.18Y_tY_{t-2}+Y_t\varepsilon_t\\
+			E(Y_t^2)&=1.1E(Y_tY_{t-1})-0.18E(Y_tY_{t-2})+E(Y_t\varepsilon_t)\\
+			\gamma_0&=1.1\gamma_1-0.18\gamma_2+\sigma^2\\
+			\\
+			\text{Encontrando a autocovariância } \gamma_j:\\
+			Y_tY_{t-j}&=1.1Y_{t-1}Y_{t-j}-0.18Y_{t-2}Y_{t-j}+Y_{t-j}\varepsilon_t\\
+			E(Y_tY_{t-j})&=1.1E(Y_{t-1}Y_{t-j})-0.18E(Y_{t-j}Y_{t-2})+E(Y_{t-j}\varepsilon_t)\\
+			\gamma_j&=1.1\gamma_{j-1}-0.18\gamma_{j-2}\\
+		\end{align*}
+		
+				Dado que $\rho_j=\gamma_j/\gamma_0$ dividindo ambos os lados de $\gamma_j$ por $\gamma_0$ temos:				
+				$$\rho_j=1.1\rho_{j-1}-0.18\rho_{j-2}$$
+				
+				Para $j=1$, $\rho_1=1.1\rho_{0}-0.18\rho_{1}$, então:
+				\begin{align*}
+					\rho_1=\frac{1.1 }{(1+0.18)}=0.9322 \\
+				\end{align*}
+				
+				Para $j=2$, $\rho_2=1.1\rho_1-0.18 $, então:				
+				\begin{align*}
+					\rho_2&=1.1(0.9322) -0.18 \\
+					&=0.8454 
+				\end{align*}
+				
+		Como $\gamma_j=\rho_j\gamma_0$, podemos escrever a variância $\gamma_0$ como:
+		\begin{align*}
+			\gamma_0&=1.1\rho_1\gamma_0-0.18\rho_2\gamma_0+\sigma^2\\
+					&=1.1(0.9322 )\gamma_0-0.18(0.8454 )\gamma_0+\sigma^2\\
+					&=1.02542 \gamma_0-0.152176 \gamma_0+\sigma^2\\
+			(1-1.02542 +0.152176 )\gamma_0&=\sigma^2\\
+			\gamma_0&=\frac{\sigma^2}{(1-1.02542 +0.152176 )}\approx7.9\sigma^2
+		\end{align*}
+		
+		Podemos verificar pela fórmula geral:
+		\begin{align*}
+			\gamma_0&=\frac{(1-\phi_2)\sigma^2}{(1+\phi_2)[(1-\phi_2^2)^2-\phi_1^2]}
+		\end{align*}
+		Dado que $\phi_1=1.1$ e $\phi_2=-0.18$
+		\begin{align*}
+			\gamma_0&=\frac{(1+0.18)\sigma^2}{(1-0.18)[(1+0.18)^2-1.1^2]}\\
+			&=\frac{(1.18)\sigma^2}{(0.82)[0.182]}\approx7.9\\
+		\end{align*}
+		Como a média e a variância não dependem do tempo, o processo $\{Y_t\}$ é estacionário em covariância.
+		
+		Para encontra as autocovariâncias usamos $\gamma_j=\rho_j\gamma_0$:
+		
+		$$\gamma_1={\rho_1}{\gamma_0}={0.9322}\times{7.9\sigma^2}\approx7.364$$
+		
+		$$\gamma_2={\rho_2}{\gamma_0}={0.8545}\times{7.9\sigma^2}\approx6.75$$
+		
+		\item %3
+		
+		\begin{align*}
+			&\psi_0+\psi_1L+\psi_2L^2+...-\phi_1\psi_0L-\phi_1\psi_1L^2-\phi_1\psi_2L^3-...
+			-\phi_2\psi_0L^2-\phi_2\psi_1L^3-\phi_2\psi_2L^4-
+			...\\
+			&-\phi_p\psi_0L^p-\phi_p\psi_1L^{p+1}-\phi_p\psi_2L^{p+2}-...=1\\
+			\\
+			&\psi_0+[\psi_1-\phi_1\psi_0]L+[\psi_2-\phi_1\psi_1-\phi_2\psi_0]L^2+[\psi_3-\phi_1\psi_2-\phi_2\psi_1-\phi_3\psi_0]L^3\\
+			&+[\psi_4-\phi_1\psi_3-\phi_2\psi_2-\phi_3\psi_1-\phi_4\psi_0]L^4+...+[\psi_j-\phi_1\psi_{j-1}-\phi_2\psi_{j-2}-...-\phi_{p-1}\psi_1-\phi_p\psi_0]L^p=1
+		\end{align*}
+		Para $j=p,p+1,...$.
+		
+		Com isso temos o seguinte sistema de equações:
+		
+		\begin{align*}
+			\psi_0&=1\\
+			\psi_1-\phi_1\psi_0&=0\\
+			\psi_2-\phi_1\psi_1-\phi_2\psi_0&=0\\
+			\psi_3-\phi_1\psi_2-\phi_2\psi_1-\phi_3\psi_0&=0\\
+			\psi_4-\phi_1\psi_3-\phi_2\psi_2-\phi_3\psi_1-\phi_4\psi_0&=0\\
+			&\vdots\\
+			\psi_j-\phi_1\psi_{j-1}-\phi_2\psi_{j-2}-...-\phi_{p-1}\psi_1-\phi_p\psi_{j-p}&=0
+		\end{align*}
+		Resolvendo a partir de $\psi_0$:
+		\begin{align*}
+			\psi_0&=1\\
+			\psi_1-\phi_1\psi_0&=0\Rightarrow \psi_1=\phi_1\\
+			\psi_2-\phi_1\psi_1-\phi_2\psi_0&=0\Rightarrow\psi_2=\phi_1^2+\phi_2\\
+			\psi_3-\phi_1\psi_2-\phi_2\psi_1-\phi_3\psi_0&=0\Rightarrow\psi_3=\phi_1\psi_2+\phi_2\psi_1+\phi_3\psi_0\\
+			&\vdots\\
+			\psi_j-\phi_1\psi_{j-1}-\phi_2\psi_{j-2}-...-\phi_{p-1}\psi_1-\phi_p\psi_0&=0\Rightarrow\psi_j=\phi_1\psi_{j-1}+\phi_2\psi_{j-2}+...+\phi_{p-1}\psi_1+\phi_p\psi_{j-p}
+		\end{align*}
+		Para $j=p,p+1,...$.
+		
+		Portanto os valores de $\psi_j$ são a solução para a equação de diferenças de $n^{\text{ésima}}$ ordem com valor inicial $\psi_0=1$ e $\psi{-1}=\psi_{-2}=...=\psi_{-p+1}=0$. Então, dos resultados das equações em diferença:
+		\begin{align*}
+		\begin{bmatrix}
+			\psi_j\\
+			\psi_{j-1}\\
+			\vdots\\
+			\psi_{-p+1}
+		\end{bmatrix}
+		=
+		\mathbf{F}^j\begin{bmatrix}
+			1\\
+			0\\
+			\vdots\\
+			0
+		\end{bmatrix}
+		\end{align*}
+		Isto é $$\psi_j=f_{11}^{(j)}$$
+		
+		\item %4
+		
+		\begin{align*}
+			\psi(L)c&=\psi_0c+\psi_1Lc+\psi_2L^2c+\psi_3L^3c+...
+			=\frac{c}{1-\phi_1L-\phi_2L^2}\\
+			\text{como } L^jc&=c \;\; \forall \;\;j\\
+			\psi(L)c\equiv\psi(1)c&=\psi_0c+\psi_1c+\psi_2c+\psi_3c+...
+			=\frac{c}{1-\phi_1-\phi_2}			
+		\end{align*}
+		
+		\item %5
+		\begin{align*}
+		\sum \limits_{j=0}^{\infty}|\psi_j|&<\infty			
+		\end{align*}
+		Deixe $\lambda_1$ e $\lambda_2$ satisfazerem $1-\phi_1L-\phi_2L^2=(1-\lambda_1L)(1-\lambda_2L)$, note que $\lambda_1$ e $\lambda_2$ ambos estão dentro do círculo unitário em um processo $AR(2)$ estacionário em covariância.
+		
+		Considere primeiro o caso em que as duas raízes $\lambda_1$ e $\lambda_2$ sejam reais e  distintas. Dado que $\psi_j=c_1\lambda_1+c_2\lambda_2$, temos:
+		
+			\begin{align*}
+				\sum \limits_{j=0}^{\infty}|\psi_j|&=\sum \limits_{j=0}^{\infty}|c_1\lambda_1^j+c_2\lambda^j_2|\\
+				&<\sum \limits_{j=0}^{\infty}|c_1\lambda_1^j|+|c_2\lambda_2^j|\\
+				&=\frac{|c_1|}{(1-|\lambda_1|)}+\frac{|c_2|}{(1-|\lambda_2|)}\\
+				&<\infty
+			\end{align*}
+			
+			Considere o caso em que $\lambda_1$ e $\lambda_2$ sejam raízes complexas conjugadas distintas. Deixe $R-|\lambda_i|$ representar o modulo de $\lambda_1$ ou $\lambda_2$. Então $0\leqslant R<1$. Dado que no caso de raízes complexas conjugadas distintas, $$c_1\lambda^j_1+c_2\lambda^j_2=2\alpha R^j\cos(\theta j)+ 2\beta R^j\text{sen}(\theta j).$$
+			
+			\begin{align*}
+				\sum \limits_{j=0}^{\infty}|\psi_j|&=\sum \limits_{j=0}^{\infty}|c_1\lambda_1^j+c_2\lambda^j_2|\\
+				&=\sum \limits_{j=0}^{\infty}|2\alpha R^j\cos(\theta j)- 2\beta R^j\text{sen}(\theta j)|\\
+				&\leqslant |2\alpha|\sum \limits_{j=0}^{\infty} R^j|\cos(\theta j)|+ |2\beta|\sum \limits_{j=0}^{\infty} R^j|\text{sen}(\theta j)|\\
+				&\leqslant |2\alpha|\sum \limits_{j=0}^{\infty}| R^j|+ |2\beta|\sum \limits_{j=0}^{\infty} |R^j\\
+				&=2\frac{(|\alpha|+|\beta|)}{(1-R)}
+			\end{align*}
+			
+			Por fim, para o  caso de raízes reais repetidas $|\lambda|<1$,			
+			\begin{align*}
+				\sum \limits_{j=0}^{\infty}|\psi_j|=\sum \limits_{j=0}^{\infty}|k_1\lambda^j+k_2j\lambda^{j-1}|\leqslant
+				 |k_1|\sum \limits_{j=0}^{\infty}|\lambda^j|+|k_2|\sum \limits_{j=0}^{\infty}|j\lambda^{j-1}|.
+			\end{align*}
+			Mas
+			$$|k_1|\sum \limits_{j=0}^{\infty}|\lambda|^j=\frac{|k_1|}{(1-|\lambda|)}<\infty$$
+			e
+			\begin{align*}
+				\sum \limits_{j=0}^{\infty}|j\lambda^{j-1}|&=1+2|\lambda|+3|\lambda|^2+4\lambda|^3+\cdots\\
+				&=1+(|\lambda|+|\lambda|)+(|\lambda|^2+|\lambda|^2+|\lambda|^2)\\
+				&\;\;+(|\lambda|^3+|\lambda|^3+|\lambda|^3+|\lambda|^3)+\cdots\\
+				&=(1+|\lambda|+|\lambda|^2+|\lambda|^3+\cdots)+(|\lambda|+|\lambda|^2+|\lambda|^3+\cdots)+(|\lambda|^2+|\lambda|^3+\cdots)+\cdots\\
+				&=\frac{1}{(1-|\lambda|)}+\frac{|\lambda|}{(1-|\lambda|)}+\frac{|\lambda|^2}{(1-|\lambda|)}+\cdots\\
+				&=\frac{1}{(1-|\lambda|)}\\
+				&<\infty
+			\end{align*}
+		
+		\item %6
+		
+		$AR(\infty)$: $$(1+\eta_1L+\eta_2L^2+\cdots)(Y_t-\mu)=\varepsilon_t$$
+		
+		$MA(q)$: $$(Y_t-\mu)=(1+\theta_1L+\theta_2L^2+\cdots+\theta_qL^q)\varepsilon_t$$
+		
+		Dado que as raízes de $1+\theta_1z+\theta_2z^2+\cdots+\theta_qz^q$ são todas reais e distintas e estão fora do círculo unitário e o processo $MA(q)$ é invertível, temos:
+		
+		$$(1+\eta_1L+\eta_2L^2+\cdots)(1+\theta_1L+\theta_2L^2+\cdots+\theta_qL^q)=1$$
+		
+		Que ao multiplicarmos, resulta em:
+		
+		\begin{align*}
+			1=\;&1+\eta_1L+\eta_2L^2+\cdots	\\
+			&+\theta_1L+\theta_1\eta_1L^2+\theta_1\eta_2L^3+\cdots\\
+			&+\theta_2L^2+\theta_2\eta_1L^3+\theta_2\eta_2L^4+\cdots\\	
+			&\;\; \vdots\\
+			&+\theta_qL^q+\theta_q\eta_1L^{q+1}+\theta_q\eta_2L^{q+1}+\cdots\\	
+		\end{align*}
+	Para $j=q, q+1,\cdots$. colocando os $L^i$'s em evidência:
+	\begin{align*}
+		1=\;1&+(\eta_1+\theta_1)L\\
+		&+(\eta_2+\theta_1\eta_1+\theta_2)L^2\\
+		&+(\eta_3+\theta_1\eta_2+\theta_2\eta_1+\theta_3)L^3\\
+		&\;\;\vdots\\
+		&+(\eta_j+\theta_1\eta_{j-1}+\cdots+\theta_{q-1}\eta_1+\theta_q)L^j
+	\end{align*}
+	
+Para $j=q,q+1,\cdots$. Para a igualdade valer, os coeficientes dos $L^i$'s devem ser zero, então:
+
+	\begin{align*}
+	\eta_1+\theta_1&=0 \Rightarrow \eta_1=-\theta_1\\
+	\eta_2+\theta_1\eta_1+\theta_2&=0 \Rightarrow \eta_2=-\theta_1\eta_1-\theta_2	=-\theta_2+\theta_1^2\\
+		\eta_3+\theta_1\eta_2+\theta_2\eta_1+\theta_3&=0 \Rightarrow \eta_3=-\theta_1\eta_2-\theta_2\eta_1-\theta_3=-\theta_1^3+2\theta_1\theta_2-\theta_3\\
+		&\;\; \vdots\\
+		\eta_j+\theta_1\eta_{j-1}+\cdots+\theta_{q-1}\eta_1+\theta_q&=0 \Rightarrow \eta_j=-\theta_1\eta_{j-1}-\cdots-\theta_{q-1}\eta_1-\theta_q
+	\end{align*}
+	
+	\item %7
+	
+	$AR(\infty)$: $$(1+\eta_1L+\eta_2L^2+\cdots)(Y_t-\mu)=\varepsilon_t$$
+	
+	$MA(q)$:$$Y_t-\mu=\Bigg\{\prod\limits_{j=0}^n(1-\lambda_jL)\Bigg\}\Bigg\{\prod\limits_{j=n+1}^q(1-\lambda_j^{-1}L)\Bigg\}\varepsilon_t$$		
+	Então:
+	$$(1+\eta_1L+\eta_2L^2+\cdots)\Bigg\{\prod\limits_{j=0}^n(1-\lambda_jL)\Bigg\}\Bigg\{\prod\limits_{j=n+1}^q(1-\lambda_j^{-1}L)\Bigg\}=1$$
+	
+	Efetuando a multiplicação, temos:
+	
+	\begin{align*}
+		1=&\; \Bigg\{\prod\limits_{j=0}^n(1-\lambda_jL)\Bigg\}\Bigg\{\prod\limits_{j=n+1}^q(1-\lambda_j^{-1}L)\Bigg\}\\
+		&+\eta_1L\Bigg\{\prod\limits_{j=0}^n(1-\lambda_jL)\Bigg\}\Bigg\{\prod\limits_{j=n+1}^q(1-\lambda_j^{-1}L)\Bigg\}\\
+		&+\eta_2L^2\Bigg\{\prod\limits_{j=0}^n(1-\lambda_jL)\Bigg\}\Bigg\{\prod\limits_{j=n+1}^q(1-\lambda_j^{-1}L)\Bigg\}\\
+		&\;\;\vdots\\
+	\end{align*}
+
+
+\begin{align*}
+	1=&\; \Bigg\{1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\Bigg\}\Bigg\{1-\frac{1}{\prod\limits_{j=n+1}^q\lambda_j}\bigg[\theta_{n+1}L+\theta_{n+2}L^2+\cdots+\theta_qL^q\bigg]\Bigg\}\\
+	&+\eta_1L\Bigg\{1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\Bigg\}\Bigg\{1-\frac{1}{\prod\limits_{j=n+1}^q\lambda_j}\bigg[\theta_{n+1}L+\theta_{n+2}L^2+\cdots+\theta_qL^q\bigg]\Bigg\}\\
+	&+\eta_2L^2\Bigg\{1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\Bigg\}\Bigg\{1-\frac{1}{\prod\limits_{j=n+1}^q\lambda_j}\bigg[\theta_{n+1}L+\theta_{n+2}L^2+\cdots+\theta_qL^q\bigg]\Bigg\}\\
+	&\;\;\vdots\\
+\end{align*}
+
+\begin{align*}
+	1=&\; \Bigg\{1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n-\frac{\bigg[1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\bigg]}{\prod\limits_{j=n+1}^q\lambda_j}\bigg[\theta_{n+1}L+\theta_{n+2}L^2+\cdots+\theta_qL^q\bigg]\Bigg\}\\
+	&+\eta_1L\Bigg\{1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\\
+	&-\frac{\bigg[\eta_1L1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\bigg]}{\prod\limits_{j=n+1}^q\lambda_j}\bigg[\theta_{n+1}L+\theta_{n+2}L^2+\cdots+\theta_qL^q\bigg]\Bigg\}\\
+	&+\eta_2L^2\Bigg\{1+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\\
+	&-\frac{\bigg[\eta_2L^21+\theta_1L+\theta_2L^2+\cdots+\theta_nL^n\bigg]}{\prod\limits_{j=n+1}^q\lambda_j}\bigg[\theta_{n+1}L+\theta_{n+2}L^2+\cdots+\theta_qL^q\bigg]\Bigg\}\\
+	&\;\;\vdots\\
+\end{align*}
+Como no exercício 6, devemos realizar as multiplicações e isolar os $L^i$'s para derivar o algoritmo dos coeficientes.
+	
+	\item %8
+	
+	
+		$$Y_t=(1+2.4L+0.8L^2)\varepsilon_t$$
+	\begin{align*}
+		\Rightarrow (1-\lambda_1z)(1-\lambda_2z)&=1+2.4z+0.8z^2\\
+		\lambda_1=-0.4,&\;\;\lambda_2=-2
+	\end{align*}
+
+Então $1+2.4z+0.8z^2=(1+0.4z)(1_2z)$ como uma raiz, $\lambda_2$ está está fora do círculo unitário, o termo $(1+0.4z)(1+2z)$ não é invertível. O operador invertível é $$(1+0.4z)(1+0.5z)=(1+0.9z+0.2z^2).$$ 
+
+	Função geradora de autocovariância e invertibilidade para um processo $MA(2)$ :
+
+				\begin{align*}
+					g_Y(z)&=\sigma^2(1+\theta_1z+\theta_2z^2)(1+\theta_1z^{-1}+\theta_2z^{-2})\\
+					&=\sigma^2(1+\theta_1z+\theta_2z^2+\theta_1z^{-1}+\theta_1^2+\theta_1\theta_2z+\theta_1z^{-2}+\theta_1\theta_2z^{-1}+\theta_2^2z^{-2})\\
+					&=\sigma^2[1+\theta_2z^2+(\theta_1+\theta_1\theta_2)z+(1+\theta_1^2+\theta_2^2)z^0+\theta_2z^{-2}+(\theta_1+\theta_1\theta_2)z^{-1}]\\
+					&\equiv \sigma^2[(1-\lambda_1z)(1-\lambda_2z)(1-\lambda_1z^{-1})(1-\lambda_2z^{-1})]\\
+				\end{align*}
+				
+				Como $\lambda_2=-2$ está fora do círculo unitário, substituímos por seu inverso $\lambda_2^{-1}=-0.5$. Devemos também substituir $\sigma^2$ por $\sigma^2\lambda_2^2$.Lembrando que $z^0=1$ para encontrarmos a autocovariância de ordem zero:
+				
+				\begin{align*}
+					g_Y&=\sigma^2\lambda_2^2[(1-\lambda_1z)(1-\lambda_2^{-1}z)(1-\lambda_1z^{-1})(1-\lambda_2^{-1}z^{-1})]\\
+					&=(1)4[(1+0.4z)(1+0.5z)(1+0.5z^{-1})(1+0.5z^{-1})]\\
+					&=4[(1+0.9z+0.2z^2)(1+0.9z^{-1}+0.2z^{-2})]\\
+					&=4[z^0+0.9z+0.2z^2+0.9z^{-1}+0.18z^0+0.18z+0.2z^{-2}+0.018z^{-1}+0.2z^0]
+				\end{align*}
+				
+				As autocovariâncias podem ser encontradas derivando a função geradora de autocovariâncias com respeito a $z^j$ em que $j$ é a ordem de defasagem desejada para a autocovariância.
+				
+				Lembrando que $z^0=1$ para encontrarmos a autocovariância de ordem zero. Então:
+				
+				\begin{align*}
+					\gamma_0&=\frac{\partial g_y}{\partial z^0}	= 4[1+0.81+0.4]=7.4\\
+					\gamma_1&=\frac{\partial g_y}{\partial z^1} = 4[0.9+0.18]=4.32\\
+					\gamma_2&=\frac{\partial g_y}{\partial z^2} = 4[0.2]=0.8
+				\end{align*}
+			
+		Que são as mesmas autocovariâncias do processo $Y_t=(1+2.4L+0.8L^2)\varepsilon_t$ do exercício 1.
+					
+					
+				
+	Podemos concluir que o processo gerado pelo operador invertível $$(1+0.4z)(1+0.5z)=(1+0.9z+0.2z^2),$$ têm a variância $\lambda_2^2=4$ vezes menor que o processo gerado pelo operador não invertível $1+2.4L+0.8L^2$. Para verificação, vamos gerar as autocovariâncias do processo invertível, conforme a fórmula padrão. Como $\theta_1=0.9$, $\theta_2=0.2$ e $\sigma^2=\sigma^2\lambda_2^2$, as autocovariâncias são:
+	
+	\begin{align*}
+		\bar{\gamma_0}&=[1+\theta_1^2+\theta_2^2]\sigma^2=1+0.81+0.04=1.85\\
+		\bar{\gamma_1}&=[\theta_1+\theta_1\theta_2]\sigma^2=0.9+0.18=1.08\\
+		\bar{\gamma_2}&=\theta_2\sigma^2=0.2
+	\end{align*}
+
+	Isto ocorre pois a variância, $\sigma^2$ das $\bar{\gamma}_s$'s deveria ter sido substituída por $\sigma^2\lambda^2_2$. Conclui-se que quando existe uma raiz $\lambda_i$ fora do círculo unitário, as autocovariâncias do proceso invertível associado devem ser infladas por um fator de $$\prod\limits_{i=n+1}^{m}\lambda_i^2.$$ em que $\lambda_n, \lambda_{n+1},\cdots, \lambda_m$ são as raízes fora do círculo unitário, $\lambda_1, \lambda_{2},\cdots, \lambda_n$ são as raízes dentro do círculo unitário e $m$ o número total de raízes.
+
+\end{enumerate}

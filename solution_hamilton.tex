@@ -1,0 +1,50 @@
+\documentclass[
+% -- opções da classe memoir --
+book,			% indica que é um livro
+11pt,				% tamanho da fonte
+oneside,			% para impressão apenas no verso. Oposto a twoside
+a4paper,			% tamanho do papel. 
+% -- opções da classe abntex2 --
+%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
+% -- opções do pacote babel --
+english,			% idioma adicional para hifenização
+brazil,				% o último idioma é o principal do documento
+sumario=tradicional
+]{abntex2}
+
+
+
+\usepackage{C:/Users/Lucca/GoogleDrive/Latex/bookstyle}
+
+\renewcommand{\ABNTEXchapterfont}{\fontfamily{lmr}\fontseries{b}\selectfont}
+
+\chapterstyle{default}
+
+\title{Solution for Time Series Analysis (Hamilton, 1994)}
+\autor{Lucca Simeoni Pavan
+	\thanks{Doutorando em Desenvolvimento Econômico, PPDGE/UFPR - warrenjax@gmail.com}}
+\local{Brasil}
+\data{\today}
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+\frontmatter
+	
+\maketitle
+
+
+\mainmatter
+
+\input{cap1hamilton}
+%\input{./chap2/cap2}
+\vspace{\onelineskip}
+%\bibliography{C:/Users/Lucca/GoogleDrive/Latex/bib}
+%\include{anexoI}
+%\include{anexoII}
+\end{document}
